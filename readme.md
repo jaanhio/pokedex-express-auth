@@ -1,40 +1,34 @@
-# Pokedex Express App (with Authentication)
+# Pokedex Express App (with PUT and DELETE requests)
 
-For this exercise, we will continue building our Pokedex web app - setting up our server to allow users to register and login with authentication.
+We will build our first web app using Node.js and Express - a Pokedex app.
 
-The starter code in this repository builds upon the previous exercise's ([pokedex-express](https://github.com/wdi-sg/pokedex-express-update-delete)).
+For this exercise, we will continue building our Pokedex web app. This time, we will set up our server to also accept PUT requests to update existing data, and we will do so using a pre-populated form that the user can submit to update data. We will also be adding a DELETE endpoint to delete any existing data.
+
+The starter code in this repository builds upon the basics of the previous exercise's code ([pokedex-express-post](https://github.com/wdi-sg/pokedex-express-post)).
 
 ## Getting Started
 
-1. Fork and clone this repository to your computer
-2. Run `yarn install` to install dependencies
-3. Look in the starter file called `index.js`, run `nodemon` to start local server on port 3000
-4. Open `localhost:3000` on your browser and see the home page
-
-#### Note on comments:
-
-The comments in this file are deliberately verbose meant to orientate you to an Express app for the first time. Feel free to remove any or all comments.
+1.  Fork and clone this repository to your computer
+2.  Run `yarn` to install dependencies
+3.  Look in the starter file called `index.js`, run `nodemon` to start local server on port 3000
+4.  Open `localhost:3000` on your browser and see the home page
 
 ## Deliverables
 
-* Expose a new endpoint that intercepts GET requests to `/users/new`, which responds with a HTML page with a new user registration `form` that has these fields: `name` and `password`
+* Expose a new GET `/:id/edit` endpoint that will return a HTML page with a form for the user to edit an existing pokemon's information (Hint: route-matching happens from top to bottom, so choose where to place the code for this endpoint carefully)
 
-* Point the form to submit data to the route (`/users`) using POST method
+* Create a new `edit.handlebars` file that is meant to be returned with GET `/:id/edit`. This form should be pre-populated with information about the pokemon that is being edited (ie. the pokemon whose `id` is specified in the route)
 
-* Using `bcrypt` hash the password before saving all the user data into `users.json`
+* Expose a new PUT `/:id` endpoint that will receive the form data from the edit form, and save the updated data into `pokedex.json` file
 
-* Save a cookie to record that the user is currently logged in then redirect to the root `'/'` endpoint
-
-* Expose a new endpoint that intercepts GET requests to `/users/logout`, which clears the cookie's loggedin status and redirects to `'/'`
-
-* Expose a new endpoint that intercepts GET requests to `/users/login`, which responds with a HTML page with a user login `form` that has these fields: `name` and `password`
-
-* Point the form to submit data to the route (`/users/login`) using POST method
-
-* Use `bcrypt` to compare the password in the `form` with the password saved in the JSON file. Save the loggedin status in the cookie and redirect to `'/'` if successful
+* Expose a new DELETE `/:id` endpoint that will delete the pokemon with specified `id` from the `pokedex.json` file
 
 ## Further
 
-* Show 'Hi, you're logged in!' in home only if the user is logged in
+* Add a link in `pokemon.handlebars` that when clicked, redirects the user to the edit page for that pokemon (eg. on `/2`, a user should be able to click a hyperlink that brings her to `/2/edit`) - this will eliminate the need for the user to type the route on the browser address bar
 
-* Show 2 buttons only if the user is not logged in: one which sends the user to the register page and another which sends them to the login page
+* Validate each field to ensure only sensible inputs are accepted before saving to pokedex.json (eg. `name` should not have numbers)
+
+## Reference for UPDATE and DELETE
+
+[Here](https://github.com/wdi-sg/express-reference/tree/update) is an example repo with UPDATE and DELETE functionality in the Pokedex app.
